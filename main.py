@@ -8,7 +8,7 @@ transactions = []
 # transactions = view_all
 
 while True:
-    choice = input("> ")
+    choice = input(">")
     if choice == "1":
         detail = user_details(transactions, "income")
         print(detail)

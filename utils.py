@@ -7,20 +7,21 @@ def main_menu_text():
     ===== BUDGET TRACKER =====
     [1] Add Income  [2] Add Expense  [3] View All  [4] Summary  [5] By Category  [6] Exit
     """
+
+
+
 def user_details(transactions, ttype):
     date = datetime.date.today().isoformat()
     category = input("Enter your category: ")
-    # description = input("Enter your description: ")
     amount = int(input("Enter your amount: "))
     transactions.append({"type": ttype, "category": category, "amount": amount, "date": date})
-
     return transactions
 
 
 
 
 def view_all(transactions):
-    if len(transactions) ==0:
+    if len(transactions) == 0:
         print("No transactions yet")
         return 
 
@@ -48,21 +49,27 @@ def get_summary(transactions):
     """
 
 def view_by_category(transactions):
-    if len(transactions) ==0:
+    if len(transactions) == 0:
         print("No transactions yet")
-        return 
-     
-    category_totals = {}
-    
+        return
+
+    expense_totals = {}
+    income_totals = {}
+
     for t in transactions:
         if t["type"] == "expense":
             cat = t["category"]
-            category_totals[cat] = category_totals.get(cat, 0) + t["amount"]   
+            expense_totals[cat] = expense_totals.get(cat, 0) + t["amount"]
+        if t["type"] == "income":
+            cat = t["category"]
+            income_totals[cat] = income_totals.get(cat, 0) + t["amount"]
 
-        result = "SPENDING BY CATEGORY\n--------------------------\n"
-    for n, v in category_totals.items():
-        result += f"{n}: ₦{v}\n" 
+    result = "SPENDING BY CATEGORY (EXPENSES)\n--------------------------\n"
+    for n, v in expense_totals.items():
+        result += f"{n}: ₦{v}\n"
 
-    return result 
-      
-    
+    result += "\nINCOME BY CATEGORY\n--------------------------\n"
+    for n, v in income_totals.items():
+        result += f"{n}: ₦{v}\n"
+
+    return result
