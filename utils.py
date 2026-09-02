@@ -40,6 +40,14 @@ def add_transaction(transactions, ttype):
     return transactions
 
 
+def user_details(transactions, ttype):
+    """Compatibility wrapper for the older `user_details` API used by tests.
+    Delegates to add_transaction to preserve the newer implementation but keep
+    the same function name expected by callers/tests.
+    """
+    return add_transaction(transactions, ttype)
+
+
 def view_all(transactions):
     if len(transactions) == 0:
         print("No transactions yet")
