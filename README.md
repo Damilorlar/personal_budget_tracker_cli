@@ -1,93 +1,109 @@
-# CLI Task Manager
+# Personal Budget Tracker CLI
 
-A command-line task management tool for creating, assigning, prioritizing, filtering, and tracking tasks. Built as a terminal-based alternative to tools like Todoist or Linear, with tasks persisted to a local SQLite database.
+A simple Python command-line application for tracking personal income and expenses. The app lets you add transactions, review all recorded entries, view a summary of totals, and see spending broken down by category.
+
+## What the project does
+
+This project currently provides an interactive menu-driven interface for:
+
+- Adding income entries
+- Adding expense entries
+- Viewing all recorded transactions
+- Seeing total income, total expenses, and net balance
+- Viewing spending totals by expense category
+
+## Current implementation status
+
+This version is a lightweight in-memory budget tracker. It does not currently persist data to a database or file, so transactions are lost when the program exits.
 
 ## Requirements
- 
-- Python 3.11+
+
+- Python 3.10+
 
 ## Installation
 
 ```bash
-git clone https://github.com/Damilorlar/personal_budget_tracker_cli
-cd project-1-cli-tool
-pip install -r requirements.txt
+git clone https://github.com/Damilorlar/personal_budget_tracker_cli.git
+cd personal_budget_tracker_cli
+python main.py
 ```
 
 ## Usage
- 
+
+Run the app:
+
 ```bash
-# Add a task
-task add "Write unit tests" --priority high --tag testing --assignee alice
- 
-# List tasks
-task list --assignee alice --status pending
- 
-# Mark a task as complete
-task done 42
- 
-# Delete a task
-task delete 42
+python main.py
 ```
 
+You will see a menu like this:
 
-### Example Output
-
-```
-$ task add "Write unit tests" --priority high --tag testing --assignee alice
-Task #42 created: "Write unit tests" [HIGH] @alice #testing
-
-$ task list --assignee alice --status pending
-┌────┬──────────────────────┬──────────┬──────────┬─────────────┐
-│ ID │ Title                │ Priority │ Status   │ Assignee    │
-├────┼──────────────────────┼──────────┼──────────┼─────────────┤
-│ 42 │ Write unit tests     │ HIGH     │ PENDING  │ alice       │
-│ 38 │ Review PR #12        │ MEDIUM   │ PENDING  │ alice       │
-└────┴──────────────────────┴──────────┴──────────┴─────────────┘
-
-$ task done 42
-Task #42 marked complete.
+```text
+===== BUDGET TRACKER =====
+[1] Add Income  [2] Add Expense  [3] View All  [4] Summary  [5] By Category  [6] Exit
 ```
 
-## Architecture
+Then enter a number from the list:
 
+- `1`: Add an income transaction
+- `2`: Add an expense transaction
+- `3`: View all recorded transactions
+- `4`: Show financial summary
+- `5`: Show spending grouped by category
+- `6`: Exit the application
+
+### Example session
+
+```text
+> 1
+Enter your category: Salary
+Enter your amount: 2500
+> 2
+Enter your category: Rent
+Enter your amount: 900
+> 4
+
+      FINANCIAL SUMMARY
+    --------------------------
+    Total Income = ₦2500
+    Total Expenses = ₦900
+    Net Balance = ₦1600
 ```
-CLI Interface (Click / Typer)
-        |
-Command Handlers (add / list / complete / delete / tag)
-        |
-Business Logic Layer (Task CRUD, filtering, prioritization)
-        |
-Storage Layer (SQLite)
+
+## Data behavior
+
+Each transaction stores:
+
+- type: `income` or `expense`
+- category
+- amount
+- date
+
+The app uses a Python list in memory to hold transactions while the program is running.
+
+## Project structure
+
+```text
+personal_budget_tracker_cli/
+├── main.py
+├── utils.py
+├── README.md
 ```
 
-## Data Model
+## Notes
 
-Each task includes: ID, title, description, status, priority, tags, assignee, and timestamps.
+- The app is intentionally minimal and does not include authentication, user accounts, or multi-file storage.
+- The summary is calculated from the current in-memory transaction list.
+- Expense category analysis only includes expense transactions.
 
 ## Development
 
-```bash
-# Run tests
-pytest
+There are no automated tests in the current repository, so the project is best validated by running the app interactively and checking menu behavior manually.
 
-# Run with coverage
-pytest --cov
+```bash
+python main.py
 ```
 
-### Workflow
+## License
 
-1. Create a branch off `main`
-2. Commit changes with descriptive messages (e.g. `feat(storage): implement SQLite task persistence`)
-3. Open a pull request and assign a reviewer
-4. Address feedback and merge
-
-
-## Team
- 
-| Role | Name |
-| --- | --- |
-| Project Lead | |
-| CLI Engineer | |
-| Storage Engineer | |
-| QA / Testing Engineer | |
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.

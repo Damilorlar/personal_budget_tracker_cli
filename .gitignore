@@ -1,0 +1,36 @@
+# Python bytecode and cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Test and coverage output
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+coverage.xml
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+
+# Build and packaging output
+build/
+dist/
+*.egg-info/
+
+# Local environment and tool files
+.env
+.env.*
+!.env.example
+.mypy_cache/
+.ruff_cache/
+.vscode/
+
+# Local application data
+*.db
+*.sqlite
+*.sqlite3

@@ -1,28 +1,31 @@
-from utils import main_menu_text, user_details, view_all,get_summary,view_by_category
+from utils import add_transaction, main_menu_text, view_all, get_summary, view_by_category
 
-print(main_menu_text())
 
-transactions = []
+def main():
+    print(main_menu_text())
+    transactions = []
 
-# details = user_details()
-# transactions = view_all
+    while True:
+        choice = input("> ")
+        if choice == "1":
+            transactions = add_transaction(transactions, "income")
+            print("Income added.")
+        elif choice == "2":
+            transactions = add_transaction(transactions, "expense")
+            print("Expense added.")
+        elif choice == "3":
+            view_all(transactions)
+        elif choice == "4":
+            print(get_summary(transactions))
+        elif choice == "5":
+            print(view_by_category(transactions))
+        elif choice == "6":
+            break
+        else:
+            print("Invalid option. Please choose a number from the menu.")
 
-while True:
-    choice = input("> ")
-    if choice == "1":
-        detail = user_details(transactions, "income")
-        print(detail)
-    elif choice == "2":
-        detail = user_details(transactions, "expense")
-        print(detail)
-    elif choice == "3":
-       view_all(transactions)
-    elif choice == "4":
-       summary = get_summary(transactions)
-       print(summary)
-    elif choice == "5":
-       category=view_by_category(transactions)
-       print(category)
+        print(main_menu_text())
 
-    elif choice == "6":
-      break  
+
+if __name__ == "__main__":
+    main()
