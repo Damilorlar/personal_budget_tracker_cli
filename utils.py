@@ -3,9 +3,9 @@ import datetime
 
 def main_menu_text():
     return """
-===== BUDGET TRACKER =====
-[1] Add Income  [2] Add Expense  [3] View All  [4] Summary  [5] By Category  [6] Exit
-"""
+ ===== BUDGET TRACKER =====
+ [1] Add Income  [2] Add Expense  [3] View All  [4] Summary  [5] By Category  [6] Exit
+ """
 
 
 def add_transaction(transactions, ttype):
